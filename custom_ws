@@ -7,6 +7,7 @@ wss.on("connection", ws=>{
     // sending message
     ws.on("message", data => {
         console.log(`Client has sent us: ${data}`)
+        ws.send(`messaggio ricevuto: ${data}`)
     });
     // handling what to do when clients disconnects from server
     ws.on("close", () => {
@@ -16,5 +17,8 @@ wss.on("connection", ws=>{
     ws.onerror = function () {
         console.log("Some Error occurred")
     }
+    ws.on("subscribe", (interval) =>{
+        ws.send("ciao");
+    })
 });
 console.log("The WebSocket server is running on port 8080");
